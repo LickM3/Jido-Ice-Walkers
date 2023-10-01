@@ -12,12 +12,13 @@ import com.hazion.api.script.Task;
 
 // Future updates: Safespot feature, xp tracker, iw area improvements, config screen.
 
-@Manifest(name = "Jido Ice Walkers", author = "LickM3", version = 0.1, description = "Farms Ice Walkers for you to gain easy combat XP in early game.")
+@Manifest(name = "Lick's Ice Walkers", author = "LickM3", version = 0.1, description = "Farms Ice Walkers for you to gain easy combat XP in early game.")
 public class Main implements Script {
 
     private ArrayList<Task> tasks = new ArrayList<>();
     public static int kills = 0;
     Timer scriptTimer = new Timer();
+    public static String currTask = "Loading...";
 
 
     @Override
@@ -47,9 +48,10 @@ public class Main implements Script {
     public void onRender() {
         // Add xp display when possible.
         JidoRenderer.drawLine(10, 115, 10, 178, 4, Color.CYAN);
-        JidoRenderer.drawText("Jido Ice Walkers 0.1", 14, 120, Color.CYAN);
+        JidoRenderer.drawText("Lick's Ice Walkers 0.1", 14, 120, Color.CYAN);
         JidoRenderer.drawText("Timer: ".concat(scriptTimer.getFormattedTime()), 14, 135, Color.WHITE);
         JidoRenderer.drawText("Kills: ".concat(String.valueOf(kills)), 14, 150, Color.WHITE);
+        JidoRenderer.drawText("Task: ".concat(currTask), 14, 165, Color.WHITE);
     }
 
     @Override

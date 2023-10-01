@@ -25,7 +25,7 @@ public class KillIceWalkers implements Task {
 
     @Override
     public int execute() {
-
+            Main.currTask = "Killing Ice Walkers";
             // IW area should be updated in future. Needs more testing.
 
                 Entity closestIceWalker = Entities.getClosest(iw -> iw instanceof RemotePlayer && iw.isAlive() && iw.getName().contains("Ice Walker") && Area.rectangular(-27.7, 25.7, 127.0, 140.0, 147.7, 177.7).contains(iw));
