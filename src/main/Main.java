@@ -3,6 +3,7 @@ package main;
 import java.awt.Color;
 
 import com.hazion.api.Chat;
+import com.hazion.api.hypixel.skyblock.skills.SkyBlockExpListener;
 import com.hazion.api.input.Input;
 import com.hazion.api.render.JidoRenderer;
 import com.hazion.api.script.Manifest;
@@ -14,7 +15,7 @@ import com.hazion.api.script.Task;
 
 // Future updates: Safespot feature, xp tracker, iw area improvements, config screen.
 
-@Manifest(name = "Lick's Ice Walkers", author = "LickM3", version = 0.1, description = "Farms Ice Walkers for you to gain easy combat XP in early game.")
+@Manifest(name = "Lick's Ice Walkers", author = "LickM3", version = 0.2, description = "Farms Ice Walkers for you to gain easy combat XP in early game.")
 public class Main implements Script {
 
     private ArrayList<Task> tasks = new ArrayList<>();
@@ -45,9 +46,16 @@ public class Main implements Script {
         return 100;
     }
 
+    /*@Override
+    public void onExpGained(double gainedExp, double currentExp, double expToNextLevel) {
+        Chat.addMessage(Chat.Level.WARNING, "Xp gained :)");
+        kills++;
+    }*/
+
     @Override
     public void onStop() {
-        Chat.addMessage(Chat.Level.INFO, "Stop scripts.");
+        Chat.addMessage(Chat.Level.INFO, "Thank you for using my scripts! If you find any bug, please report it to LickM3");
+        Input.clear();
         Input.MOVE_FORWARD.setHoldingDown(false);
     }
 
@@ -55,9 +63,9 @@ public class Main implements Script {
     public void onRender() {
         // Add xp display when possible.
         JidoRenderer.drawLine(10, 115, 10, 178, 4, Color.CYAN);
-        JidoRenderer.drawText("Lick's Ice Walkers 0.1", 14, 120, Color.CYAN);
+        JidoRenderer.drawText("Lick's Ice Walkers 0.2", 14, 120, Color.CYAN);
         JidoRenderer.drawText("Timer: ".concat(scriptTimer.getFormattedTime()), 14, 135, Color.WHITE);
-        JidoRenderer.drawText("Kills: ".concat(String.valueOf(kills)), 14, 150, Color.WHITE);
+        //JidoRenderer.drawText("Kills: ".concat(String.valueOf(kills)), 14, 150, Color.WHITE);
         JidoRenderer.drawText("Task: ".concat(currTask), 14, 165, Color.WHITE);
     }
 
