@@ -1,5 +1,6 @@
 package main.tasks;
 
+import com.hazion.api.Chat;
 import com.hazion.api.Entities;
 import com.hazion.api.camera.Camera;
 import com.hazion.api.input.Input;
@@ -32,11 +33,7 @@ public class KillIceWalkers implements Task {
                 BlockPos whereStanding = PlayerHelper.getStandingOn();
                 Camera.lockOnto(closestIceWalker, true);
                 do {
-                    if (MovementHandler.canWalkTo(closestIceWalker.getStandingOn())) {
-                        MovementHandler.walkTo(closestIceWalker.getStandingOn());
-                    } else {
-                        return 500;
-                    }
+                    Input.MOVE_FORWARD.setHoldingDown(true);
                     if (PlayerHelper.playerFeet().getDistance(closestIceWalker.getStandingOn().getX(), closestIceWalker.getStandingOn().getY(), closestIceWalker.getStandingOn().getZ()) < 4) {
                         Input.CLICK_LEFT.click();
                     }
@@ -48,11 +45,16 @@ public class KillIceWalkers implements Task {
                     }
                 }while(closestIceWalker.isAlive());
 
+                if (!closestIceWalker.isAlive() || PlayerHelper.playerFeet().getDistance(whereStanding.getX(), whereStanding.getY(), whereStanding.getZ()) < 3) {
+                    Chat.addMessage(Chat.Level.WARNING, "Ice Walker got killed. Movement should stop!");
+                    Input.MOVE_FORWARD.setHoldingDown(false);
+                }
+
                 if (!closestIceWalker.isAlive() && PlayerHelper.playerFeet().getDistance(closestIceWalker.getStandingOn().getX(), closestIceWalker.getStandingOn().getY(), closestIceWalker.getStandingOn().getZ()) < 4) {
                     Main.kills++;
                 }
 
-                return 100;
+                return 500;
                 }
 
     }

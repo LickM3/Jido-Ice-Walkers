@@ -2,6 +2,8 @@ package main;
 
 import java.awt.Color;
 
+import com.hazion.api.Chat;
+import com.hazion.api.input.Input;
 import com.hazion.api.render.JidoRenderer;
 import com.hazion.api.script.Manifest;
 import com.hazion.api.script.Script;
@@ -43,6 +45,11 @@ public class Main implements Script {
         return 100;
     }
 
+    @Override
+    public void onStop() {
+        Chat.addMessage(Chat.Level.INFO, "Stop scripts.");
+        Input.MOVE_FORWARD.setHoldingDown(false);
+    }
 
     @Override
     public void onRender() {
